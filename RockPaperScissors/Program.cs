@@ -8,9 +8,11 @@ namespace RockPaperScissors
 {
     class Program
     {
+        enum HandType { Rock, Paper, Scissors };
         static void Main(string[] args)
         {
-            int input;
+            
+        int input;
             do
             {
                 Console.Clear();
@@ -33,7 +35,7 @@ namespace RockPaperScissors
             {
                 Console.Clear();
                 string name;
-                Console.WriteLine($"Player {i}, enter your name");
+                Console.WriteLine($"Player {i+1}, enter your name");
                 name = Console.ReadLine();
                 players.Add(new Player { Name = name });
             }
@@ -48,46 +50,40 @@ namespace RockPaperScissors
                 Console.Clear();
                 Console.WriteLine($"{p.Name} select your hand");
                 Console.WriteLine("1) Rock\n2) Paper\n3) Scissor");
-                // 1 = Rock, 2 = Paper and 3 = Scissors
-                p.Hand = int.Parse(Console.ReadLine());
+                
+                p.Hand = int.Parse(Console.ReadLine()) -1;
             }
             return players;
         }
 
         public static string CompareHandsHelper(List<Player> players)
         {           
-            // 1 = Rock, 2 = Paper and 3 = Scissors
             if (players[0].Hand == players[1].Hand)
             {
                 return "Draw";
             }
 
-
-            if (players[0].Hand == 1 && players[1].Hand == 3) // Rock vs Scissors = Rock wins	
+            if (players[0].Hand == 1 && players[1].Hand == (int)HandType.Scissors) // Rock vs Scissors = Rock wins	
             {
                 return players[0].Name;
             }
 
-
-            if (players[0].Hand == 1 && players[1].Hand == 2) // Rock vs Paper = Paper wins
+            if (players[0].Hand == 1 && players[1].Hand == (int)HandType.Paper) // Rock vs Paper = Paper wins
             {
                 return players[1].Name;
             }
 
-
-            if (players[0].Hand == 3 && players[1].Hand == 1) // Scissors vs Rock = Rock wins	
+            if (players[0].Hand == 3 && players[1].Hand == (int)HandType.Rock) // Scissors vs Rock = Rock wins	
             {
                 return players[1].Name;
             }
 
-
-            if (players[0].Hand == 3 && players[1].Hand == 2) //Scissors vs Paper = Scissors wins	
+            if (players[0].Hand == 3 && players[1].Hand == (int)HandType.Paper) //Scissors vs Paper = Scissors wins	
             {
                 return players[0].Name;
             }
 
-
-            if (players[0].Hand == 2 && players[1].Hand == 3) //Paper vs Scissors = Scissors wins	
+            if (players[0].Hand == 2 && players[1].Hand == (int)HandType.Scissors) //Paper vs Scissors = Scissors wins	
             {
                 return players[1].Name;
             }
@@ -104,17 +100,19 @@ namespace RockPaperScissors
             Console.Clear();
             if (winner == players[0].Name)
             {
-                Console.WriteLine($"{players[0].Name} won!");
+                Console.WriteLine($"{players[0].Name}:{(HandType)players[0].Hand} vs {players[1].Name}:{(HandType)players[1].Hand}");
+                Console.WriteLine($"{players[0].Name} won with {(HandType)players[0].Hand}!");
                 Console.WriteLine("Press enter to continue");
                 Console.ReadLine();
             }
-            if (winner == players[1].Name)
+            else if (winner == players[1].Name)
             {
-                Console.WriteLine($"{players[1].Name} won!");
+                Console.WriteLine($"{players[0].Name}:{(HandType)players[0].Hand} vs {players[1].Name}:{(HandType)players[1].Hand}");
+                Console.WriteLine($"{players[1].Name} won with {(HandType)players[1].Hand}!");
                 Console.WriteLine("Press enter to continue");
                 Console.ReadLine();
             }
-            if(winner != players[0].Name && winner != players[1].Name)
+            else //if(winner != players[0].Name && winner != players[1].Name)
             {
                 Console.WriteLine("Draw!");
                 Console.WriteLine("Press enter to continue");
