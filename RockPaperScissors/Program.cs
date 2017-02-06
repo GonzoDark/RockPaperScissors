@@ -10,7 +10,7 @@ namespace RockPaperScissors
     {
         enum HandType { Rock, Paper, Scissors };
         enum MainMenuSelection { StartGame, ShowRules, EndGame };
-        enum SubMenuSelection { NextRound, ShowStatus, GiveUp };
+        enum SubMenuSelection { NextRound, ShowStatus, GiveUp }; //
         static void Main(string[] args)
         {
             
